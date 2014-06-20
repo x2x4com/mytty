@@ -11,9 +11,9 @@
 # REQUIREMENTS:  ---
 #         BUGS:  ---
 #        NOTES:  ---
-#       AUTHOR:  xuxiang@shopex.cn ; x2x4com@gmail.com
-#      COMPANY:  ShopEx
-#      VERSION:  1.1
+#       AUTHOR:  xuxiang@zrit100.com ; x2x4com@gmail.com
+#      COMPANY:  zrit
+#      VERSION:  2.1 
 #      CREATED:  11/12/2012 10:50:00 AM
 #     REVISION:  001
 #===============================================================================
@@ -32,7 +32,7 @@ use Data::Dumper;
 
 my @ifconfig_source = \`/sbin/ifconfig\`;
 my $if_hash = {}; 
-my $show_int = "^(en|br|tun|eth)";
+my $show_int = "^(en|br|tun|eth|em|bond|tap)";
 my $int_name;
 
 foreach my $line (@ifconfig_source) {
@@ -41,7 +41,7 @@ foreach my $line (@ifconfig_source) {
     $int_name = undef;
     next;
   }
-  if ($line =~ /^(\w+)(:)?\s+/) {
+  if ($line =~ /^([a-zA-Z0-9:]+)\s+/) {
     $int_name = $1; 
     $if_hash->{$int_name} = []; 
     next;
